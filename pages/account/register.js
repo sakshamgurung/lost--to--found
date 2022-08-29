@@ -42,19 +42,17 @@ function Register() {
 			if (data) {
 				if (!data.accountExists) {
 					setRegSuccess(true);
-				} else {
-					console.log("Email already exists");
 					notificationCtx.showNotification({
-						title: "Error!",
-						message: "Email already exists",
-						status: "error",
+						title: "Register success",
+						message: "Now login",
+						status: "success",
 					});
 				}
 			}
 		} catch (error) {
 			notificationCtx.showNotification({
 				title: "Error!",
-				message: "Something went wrong!",
+				message: error.response?.data.message || "Something went wrong!",
 				status: "error",
 			});
 			errorHandling(error);

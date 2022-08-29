@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from "react";
+import { useState, useEffect, useContext, Fragment } from "react";
 
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,6 +9,7 @@ import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import DatePicker from "react-datepicker";
 import _ from "lodash";
 
+import NotificationContext from "../../store/notification-context";
 import { createSubmission, deleteSubmission } from "../../lib/submission-api";
 import { uploadImage } from "../../lib/img-upload-api";
 import PhotoForm from "./PhotoForm";
@@ -23,11 +24,11 @@ function AddEdit({
 	cat,
 	submission,
 }) {
+	const notificationCtx = useContext(NotificationContext);
 	const type = [
 		{ label: "Lost", value: "lost" },
 		{ label: "Found", value: "found" },
 	];
-
 	const [selectedImages, setSelectedImages] = useState([]);
 	const [locs, setLocs] = useState([]);
 	const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -135,6 +136,11 @@ function AddEdit({
 				createSubmission(data)
 					.then((res2) => {
 						setSubmitSuccess(true);
+						notificationCtx.showNotification({
+							title: "Submission Success",
+							message: "Enjoy",
+							status: "success",
+						});
 					})
 					.catch((error) => {
 						console.log("Form submission error: ", error);

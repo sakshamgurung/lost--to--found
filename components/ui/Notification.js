@@ -12,7 +12,7 @@ function Notification(props) {
 	return (
 		<div
 			className={classNames(
-				"fixed h-14 max-w-full top-0 left-0 right-0 mt-2 bg-primary text-slate-100 py-2 px-[10%] shadow-sm shadow-primary rounded-md flex flex-col justify-between items-center",
+				"fixed h-14 max-w-full top-0 left-0 right-0 mt-2 text-slate-100 py-2 px-[10%] rounded-md flex flex-col justify-between items-center",
 				{ "bg-blue-500": status === "pending" },
 				{ "bg-green-500": status === "success" },
 				{ "bg-red-500": status === "error" }

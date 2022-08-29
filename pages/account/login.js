@@ -39,20 +39,18 @@ function Login() {
 	async function onSubmit({ email, password }) {
 		try {
 			let data = await login(email, password);
-			console.log("login data: ", data);
-			if (data?.isAuth) {
+			if (data.isAuth) {
 				setLoginVerified(true);
-			} else {
 				notificationCtx.showNotification({
-					title: "Error!",
-					message: data.message || "Invalid email or password",
-					status: "error",
+					title: "Login Success",
+					message: "Enjoy",
+					status: "success",
 				});
 			}
 		} catch (error) {
 			notificationCtx.showNotification({
-				title: "Error!",
-				message: "Something went wrong!",
+				title: "Login Error",
+				message: error.response?.data.message || "Something went wrong!",
 				status: "error",
 			});
 			errorHandling(error);
