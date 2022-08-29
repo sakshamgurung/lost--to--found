@@ -2,7 +2,7 @@ import { useState, useEffect, createContext } from "react";
 
 import { useRouter } from "next/router";
 
-import { isAuth } from "../lib/api-util";
+import { isAuth } from "../lib/account-api";
 
 const AuthContext = createContext({
 	auth: null,

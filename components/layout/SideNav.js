@@ -6,7 +6,7 @@ import { FaRegSadTear, FaMapMarkerAlt } from "react-icons/fa";
 import { IoHandLeft } from "react-icons/io5";
 import { MdLogout } from "react-icons/md";
 
-import { logout } from "../../lib/api-util";
+import { logout } from "../../lib/account-api";
 
 function SideNav() {
 	const router = useRouter();
@@ -46,7 +46,7 @@ function SideNav() {
 				</li>
 				<ul className="space-y-1 ">
 					<li className="text-base font-medium text-opacity-90">
-						<span>I have</span>
+						<span>Explore</span>
 					</li>
 					<li>
 						<Link href="/lost">
@@ -69,23 +69,6 @@ function SideNav() {
 							>
 								<IoHandLeft size="20" className="mr-3" />
 								<span>Found</span>
-							</a>
-						</Link>
-					</li>
-				</ul>
-				<ul className="space-y-1">
-					<li className="text-base font-medium text-opacity-90">
-						<span>Explore</span>
-					</li>
-					<li>
-						<Link href="/explore">
-							<a
-								className={classNames("side-nav-anchor", {
-									"text-slate-100 bg-primary": router.pathname === "/explore",
-								})}
-							>
-								<FaMapMarkerAlt size="20" className="mr-3" />
-								<span>Explore Lost Items</span>
 							</a>
 						</Link>
 					</li>

@@ -5,9 +5,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
-import { login } from "../../lib/api-util";
+import { login } from "../../lib/account-api";
 import NotificationContext from "../../store/notification-context";
 import { errorHandling } from "../../lib/error-handling";
+import Spinner from "../../components/ui/Spinner";
 
 function Login() {
 	const router = useRouter();
@@ -94,8 +95,7 @@ function Login() {
 							disabled={formState.isSubmitting}
 							className="px-6 py-2 rounded-md min-w-min bg-primary text-slate-100"
 						>
-							{formState.isSubmitting && <span>Loading...</span>}
-							Login
+							{formState.isSubmitting ? <Spinner /> : "Login"}
 						</button>
 
 						<Link href="/account/register">
