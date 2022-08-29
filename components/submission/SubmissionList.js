@@ -9,20 +9,22 @@ function SubmissionList({ rightSection, setRightSection, data }) {
 				<div className="flex-[0.2] px-2">Type</div>
 			</div>
 			{data != null ? (
-				data.map((submission, index) => {
-					return (
-						<SubmissionItem
-							key={index}
-							submission={submission}
-							index={index}
-							selectedItem={rightSection}
-							setItem={setRightSection}
-						/>
-					);
-				})
-			) : (
-				<div>No submission</div>
-			)}
+				data.length != 0 ? (
+					data.map((submission, index) => {
+						return (
+							<SubmissionItem
+								key={index}
+								submission={submission}
+								index={index}
+								selectedItem={rightSection}
+								setItem={setRightSection}
+							/>
+						);
+					})
+				) : (
+					<div className="flex flex-row justify-center mt-5">No submission</div>
+				)
+			) : null}
 		</section>
 	);
 }
