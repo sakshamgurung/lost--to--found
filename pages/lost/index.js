@@ -87,7 +87,7 @@ function Lost() {
 							className="min-w-full bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-md focus:ring-blue-400 focus:border-blue-400 p-2.5"
 						/>
 					</section>
-					<section className="flex flex-row gap-3 mx-6 my-4 text-slate-50 h-16 overflow-x-scroll">
+					<section className="flex flex-row gap-3 mx-6 my-4 text-slate-50 h-16 overflow-x-scroll overflow-y-hidden">
 						<button
 							key="All"
 							onClick={() => searchByCategory({ label: "All", value: "All" })}
