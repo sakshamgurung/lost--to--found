@@ -24,14 +24,15 @@ export function AuthCtxProvider({ children }) {
 	}, []);
 
 	function isUserAuthenticated(url) {
-		console.log("Current url: ", url);
 		const publicPaths = ["/account/login", "/account/register", "/account/success"];
 		const path = url.split("?")[0];
 
 		isAuth()
 			.then((res) => {
-				console.log("isAuth:", res);
 				if (res.isAuth) {
+					if (publicPaths.includes(path)) {
+						router.push("/");
+					}
 					setAuth({ isAuth: true });
 				} else {
 					setAuth(null);

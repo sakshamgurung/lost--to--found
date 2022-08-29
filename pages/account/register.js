@@ -6,12 +6,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
+import AuthContext from "../../store/auth-context";
 import { createAccount } from "../../lib/account-api";
 import NotificationContext from "../../store/notification-context";
 import { errorHandling } from "../../lib/error-handling";
 import Spinner from "../../components/ui/Spinner";
 
 function Register() {
+	const authCtx = useContext(AuthContext);
 	const router = useRouter();
 	const [regSuccess, setRegSuccess] = useState(false);
 	const notificationCtx = useContext(NotificationContext);
@@ -59,69 +61,73 @@ function Register() {
 		}
 	}
 
-	return (
-		<div className="m-auto max-w-[600px] mt-32">
-			<section className="py-4 text-3xl font-medium text-center text-primary">
-				Lost To Found
-			</section>
-			<section className="flex flex-col p-4 rounded-md shadow-md bg-slate-50">
-				<h4 className="text-2xl text-gray-600">Register</h4>
-				<form className="mt-1 text-xl font-light" onSubmit={handleSubmit(onSubmit)}>
-					<div className="flex flex-col">
-						<div className="flex flex-row items-center flex-1 ">
-							<label>Name</label>
-							<div className="ml-4 text-base text-red-500">{errors.name?.message}</div>
+	if (authCtx.auth?.isAuth) {
+		return null;
+	} else {
+		return (
+			<div className="m-auto max-w-[600px] mt-32">
+				<section className="py-4 text-3xl font-medium text-center text-primary">
+					Lost To Found
+				</section>
+				<section className="flex flex-col p-4 rounded-md shadow-md bg-slate-50">
+					<h4 className="text-2xl text-gray-600">Register</h4>
+					<form className="mt-1 text-xl font-light" onSubmit={handleSubmit(onSubmit)}>
+						<div className="flex flex-col">
+							<div className="flex flex-row items-center flex-1 ">
+								<label>Name</label>
+								<div className="ml-4 text-base text-red-500">{errors.name?.message}</div>
+							</div>
+							<input
+								className="input-text"
+								name="name"
+								placeholder="John Doe"
+								type="text"
+								{...register("name")}
+							/>
 						</div>
-						<input
-							className="input-text"
-							name="name"
-							placeholder="John Doe"
-							type="text"
-							{...register("name")}
-						/>
-					</div>
-					<div className="flex flex-col">
-						<div className="flex flex-row items-center flex-1 ">
-							<label>Email</label>
-							<div className="ml-4 text-base text-red-500">{errors.email?.message}</div>
+						<div className="flex flex-col">
+							<div className="flex flex-row items-center flex-1 ">
+								<label>Email</label>
+								<div className="ml-4 text-base text-red-500">{errors.email?.message}</div>
+							</div>
+							<input
+								className="input-text"
+								name="email"
+								placeholder="example@gmail.com"
+								type="text"
+								{...register("email")}
+							/>
 						</div>
-						<input
-							className="input-text"
-							name="email"
-							placeholder="example@gmail.com"
-							type="text"
-							{...register("email")}
-						/>
-					</div>
-					<div>
-						<div className="flex flex-row items-center flex-1 ">
-							<label>Password</label>
-							<div className="ml-4 text-base text-red-500">{errors.password?.message}</div>
+						<div>
+							<div className="flex flex-row items-center flex-1 ">
+								<label>Password</label>
+								<div className="ml-4 text-base text-red-500">{errors.password?.message}</div>
+							</div>
+							<input
+								className="input-text"
+								name="password"
+								placeholder="password"
+								type="password"
+								{...register("password")}
+							/>
 						</div>
-						<input
-							className="input-text"
-							name="password"
-							placeholder="password"
-							type="password"
-							{...register("password")}
-						/>
-					</div>
-					<div className="flex flex-col mt-3">
-						<button
-							disabled={formState.isSubmitting}
-							className="px-6 py-2 rounded-md min-w-min bg-primary text-slate-100"
-						>
-							{formState.isSubmitting ? <Spinner /> : "Register"}
-						</button>
+						<div className="flex flex-col mt-3">
+							<button
+								disabled={formState.isSubmitting}
+								className="px-6 py-2 rounded-md min-w-min bg-primary text-slate-100"
+							>
+								{formState.isSubmitting ? <Spinner /> : "Register"}
+							</button>
 
-						<Link href="/account/login">
-							<a className="mt-3 text-blue-500">Cancel</a>
-						</Link>
-					</div>
-				</form>
-			</section>
-		</div>
-	);
+							<Link href="/account/login">
+								<a className="mt-3 text-blue-500">Cancel</a>
+							</Link>
+						</div>
+					</form>
+				</section>
+			</div>
+		);
+	}
 }
 
 export default Register;

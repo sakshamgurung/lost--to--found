@@ -71,7 +71,7 @@ function Found() {
 		}
 	};
 
-	if (!authCtx) {
+	if (!authCtx.auth) {
 		return null;
 	} else {
 		return (
